@@ -1,6 +1,7 @@
 package sbc;
 
 
+
 import java.time.Duration;
 import java.util.Iterator;
 import java.util.List;
@@ -21,7 +22,7 @@ import org.testng.annotations.Test;
 
 
 
-public class CASE_AccountBalanceComputation
+public class Sample
 {
 
 	WebDriver driver;
@@ -33,7 +34,7 @@ public class CASE_AccountBalanceComputation
 	@Test(priority=1)
 	public void individualCustomercreditCardCaseJourney() throws InterruptedException
 	{
-		String baseUrl="https://sbcdev.crmnext.com/accg7/app/login/login";
+		String baseUrl="https://sbcdev.crmnext.com/sag7/app/login/login";
 //		String driverPath="D:\\Ashish\\Projects\\Automation\\Drivers\\chromedriver_win32\\chromedriver.exe";
 //		String baseUrl="https://sbcdev.crmnext.com/sag7/app/login/login";
 		String driverPath="D:\\Aman\\Automation\\Browser Driver\\Chrome\\chromedriver_win32\\chromedriver.exe";
@@ -167,12 +168,23 @@ public class CASE_AccountBalanceComputation
     		 creditcardproduct.get(i).click();
     		 System.out.println("Credit Card Account Number is selected");
     		 break;
+    		 
     	 }
     	 else
     	 {
     		 System.out.println("Credit Card Product not found");
     	 }
      }
+   
+     
+     Thread.sleep(3000);
+     Select  SourceValues= new Select (driver.findElement(By.xpath("//select[@name='CASE_ORIGIN']")));
+     System.out.println(SourceValues);
+     
+     SourceValues.selectByVisibleText("Call Center");
+     System.out.println("Call Center is selected");
+     Thread.sleep(3000);
+     
      try 
      {
      driver.findElement(By.xpath("//a[@data-autoid='FlowNext']")).click();
@@ -228,21 +240,86 @@ public class CASE_AccountBalanceComputation
 	}
 	
 	@Test(priority=2)
+//  *******************
 	public void stage1() throws InterruptedException 
 	{
+		driver.findElement(By.id("TxtName")).sendKeys("203953"); //loginid
+	    driver.findElement(By.id("TxtPassword")).sendKeys("acid_qa"); //password
+	    driver.findElement(By.name("command")).click();// click enter
+	    
+	    Actions quick1 = new Actions(driver);
+	    quick1.moveToElement(driver.findElement(By.className("icon-service"))).perform();
+	    driver.findElement(By.xpath("/html/body/div[2]/div[1]/div/ul/li[4]/div/div[2]/ul/li[1]/a/span")).click();//
+	    
+	    Select bucket2 = new Select(driver.findElement(By.name("QueryCategoryId")));
+	    bucket2.selectByVisibleText("Case");
+	    
+	    
+	    
+	    Thread.sleep(1000);
+	    driver.findElement(By.xpath("//*[@id=\"js-vnav\"]/li[2]/div/div[1]/a[1]")).click();//Leads object
+	    JavascriptExecutor js =(JavascriptExecutor)driver;
+	    js.executeScript("window.scrollBy(0,1100)", " "); //Move Down the page
+	    driver.findElement(By.xpath("//select[@name='QueryViewId']")).click(); //Click to select view
+	    driver.findElement(By.xpath("//option[@value='55']")).click(); // Select record
+	    driver.findElement(By.xpath("//a[@class='filterGroup__button acid-btn acid-btn--outline-brand']")).click(); // Click on arrow
+	    Thread.sleep(4000);
+	    driver.findElement(By.xpath("//label[@for='checkbox0']")).click();// select the lead
+	    driver.findElement(By.xpath("//i[@title='Self Assign Cases']")).click();// Click on Self assign button
+	    Thread.sleep(2000);
+	    driver.findElement(By.xpath("//button[normalize-space()='Ok']")).click(); // Click on OK in pop up
+	   Thread.sleep(1000);
+	    driver.findElement(By.xpath("//option[@value='56']")).click(); // Select My Leads view
+	    Thread.sleep(2000);
+	    driver.findElement(By.xpath("//a[@class='filterGroup__button acid-btn acid-btn--outline-brand']")).click(); // Click on arrow
+	  Thread.sleep(2000);
+	    driver.findElement(By.cssSelector("#home-page > div.react-form.form > div > div > div > div > div:nth-child(2) > div > div > div > div > div > div > div.tableWrapper.overflow-y-hidden.flex > div > div.customViewGrid.crm-table__body.overflow-auto.scroll.grid-without-actions > div:nth-child(1) > div > div.react-grid-Main > div > div:nth-child(2) > div > div > div:nth-child(2) > div:nth-child(1) > div.react-grid-Row.react-grid-Row--even > div:nth-child(1) > div > div > span > a > span") ).click();// select the lead
+	    //Click on the record
+	    Thread.sleep(1000);
+	    driver.findElement(By.xpath("//i[@class='icon icon-edit']")).click(); // Click on edit button
+	    
+	    driver.findElement(By.xpath("//select[@name='cust_512']")).click(); // Click on dropdown
+	    Thread.sleep(1000);
+	    WebElement ddown = driver.findElement(By.xpath("//select[@name='cust_512']")); // Select Accept in drop down
+	    Select SM = new Select(ddown);
+	    SM.selectByIndex(1);
+	    Thread.sleep(1000);
+	    driver.findElement(By.xpath("//textarea[@placeholder='Please post your comments here']")).sendKeys("Remarks by Processor"); //Enter message
+	    Thread.sleep(1000);
+	    driver.findElement(By.xpath("//a[@data-autoid='FlowNext']")).click(); // Click on Save and Proceed button
+	
+	    Thread.sleep(3000);
+    //driver.manage().window().maximize();
+    wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[contains(@class,'header__item header__profile')]/a/img")));
+    WebElement logoutElement=driver.findElement(By.xpath("//div[contains(@class,'header__item header__profile')]/a/img"));
+    
+	  JavascriptExecutor jse= (JavascriptExecutor)driver;
+	  jse.executeScript("arguments[0].click()", logoutElement);
+	 
+    Thread.sleep(2000);
+    System.out.println("Clicked on right Top cornor for logout");
+    
+    driver.findElement(By.xpath("//a[@title='Logout']")).click();
+    Thread.sleep(2000);
+    System.out.println("Logout Successfully");
+	}
+	
+	@Test(priority=3)
+	public void stage2() throws InterruptedException 
+	{
 
-		driver.findElement(By.name("UserName")).sendKeys("200652");
+		driver.findElement(By.name("UserName")).sendKeys("150153");
     	Thread.sleep(2000);
         driver.findElement(By.name("SecureTextBox.Text")).sendKeys("acid_qa");
    
         driver.findElement(By.name("command")).click();
    
-        System.out.println("CCG Inbound Login Successfull");
-        
+        System.out.println("CCG Authorizer Login Successfull");
+        Thread.sleep(4000);
         driver.findElement(By.className("icon-service")).click();
         System.out.println("Click Service");
    
-        
+        Thread.sleep(3000);
         driver.findElement(By.className("icon-obj9")).click();
         System.out.println("Click Cases");
    
@@ -260,6 +337,7 @@ public class CASE_AccountBalanceComputation
     
         View.selectByVisibleText("Assigned to Department");
 
+        Thread.sleep(3000);
         driver.findElement(By.xpath("//a[@class='filterGroup__button acid-btn acid-btn--outline-brand']")).click();
         }
         catch(StaleElementReferenceException e)
@@ -274,8 +352,9 @@ public class CASE_AccountBalanceComputation
         
             View.selectByVisibleText("Assigned to Department");
 
+            Thread.sleep(3000);
             driver.findElement(By.xpath("//a[@class='filterGroup__button acid-btn acid-btn--outline-brand']")).click();
-        	
+            Thread.sleep(3000);
         }
 
 //     String CaseIDStage1=caseIDcasting;
@@ -288,6 +367,7 @@ public class CASE_AccountBalanceComputation
         	if(caseID2.equals(CaseActual))
         	{
      		
+        		Thread.sleep(3000);
         		//wait.until(ExpectedConditions.stalenessOf(driver.findElement(By.cssSelector(".react-grid-Cell.react-grid-Cell--frozen.rdg-last--frozen"))));
 				driver.findElement(By.cssSelector(".react-grid-Cell.react-grid-Cell--frozen.rdg-last--frozen")).click();
 				System.out.println("Checkbox against cases is selected");
