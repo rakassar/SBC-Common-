@@ -34,7 +34,7 @@ public class AccountBalanceComputation_Email
 	public void individualCustomercreditCardCaseJourney() throws InterruptedException
 	{
 		String baseUrl="https://sbcdev.crmnext.com/sag7/app/login/login";
-		String driverPath="D:\\Aman\\Automation\\Browser Driver\\Chrome\\chromedriver_win32\\chromedriver.exe";
+		String driverPath="D:\\Rizwan\\Automation\\lib\\chromedriver.exe";
 		String BBN="10000000537";
 		
 		System.setProperty("webdriver.chrome.driver",driverPath);
