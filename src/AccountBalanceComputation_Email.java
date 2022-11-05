@@ -21,7 +21,7 @@ import org.testng.annotations.Test;
 
 
 
-public class CASE_AccountBalanceComputation
+public class AccountBalanceComputation_Email
 {
 
 	WebDriver driver;
@@ -33,21 +33,17 @@ public class CASE_AccountBalanceComputation
 	@Test(priority=1)
 	public void individualCustomercreditCardCaseJourney() throws InterruptedException
 	{
-		String baseUrl="https://sbcdev.crmnext.com/accg7/app/login/login";
-//		String driverPath="D:\\Ashish\\Projects\\Automation\\Drivers\\chromedriver_win32\\chromedriver.exe";
-//		String baseUrl="https://sbcdev.crmnext.com/sag7/app/login/login";
+		String baseUrl="https://sbcdev.crmnext.com/sag7/app/login/login";
 		String driverPath="D:\\Aman\\Automation\\Browser Driver\\Chrome\\chromedriver_win32\\chromedriver.exe";
 		String BBN="10000000537";
 		
 		System.setProperty("webdriver.chrome.driver",driverPath);
-   // 	WebDriver driver = new ChromeDriver();
     	driver = new ChromeDriver();
     //	driver.manage().deleteAllCookies();
     //	JavascriptExecutor js = (JavascriptExecutor) driver;
         js = (JavascriptExecutor) driver;
     	driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-   //     String baseUrl = "https://sbcdev.crmnext.com/sn/app/login/login";
    //     WebDriverWait wait= new WebDriverWait(driver, Duration.ofSeconds(10));
         wait= new WebDriverWait(driver, Duration.ofSeconds(10));
         
@@ -55,16 +51,14 @@ public class CASE_AccountBalanceComputation
         
     	//driver.manage().deleteAllCookies();
     
-    
-   //     String baseUrl = "https://sbcdev.crmnext.com/sn/app/login/login";
+   
      
       WebElement username=driver.findElement(By.id("TxtName"));
       WebElement password=driver.findElement(By.id("TxtPassword"));
       
-      username.sendKeys("100082");
+      username.sendKeys("109840");
       password.sendKeys("acid_qa");
       driver.findElement(By.name("command")).click();
-//      Thread.sleep(3000);
       //Click Quick Links and Go to Customer Search
       
       Actions quick = new Actions(driver);
@@ -144,6 +138,16 @@ public class CASE_AccountBalanceComputation
               CustomerService.click();	
               }    
       }
+      
+      Thread.sleep(1000);
+      driver.findElement(By.xpath("//select[@name='CASE_ORIGIN']")).click();
+      
+      driver.manage().window().maximize();
+      Select bucket1 = new Select(driver.findElement(By.xpath("//select[@name='CASE_ORIGIN']")));
+  	bucket1.selectByVisibleText("Email");
+      
+      Thread.sleep(1000);
+     
 
 //   driver.switchTo().window(mainWindowHandle);
    wait.until(ExpectedConditions.presenceOfElementLocated(By.name("CASE_SUBCATEGORY1")));
@@ -156,7 +160,7 @@ public class CASE_AccountBalanceComputation
      
      wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@data-autoid='CASE_PRDHOLDINGNUMBER_srch']")));
      driver.findElement(By.xpath("//a[@data-autoid='CASE_PRDHOLDINGNUMBER_srch']")).click();
-     
+    
      List<WebElement> creditcardproduct=driver.findElements(By.xpath("//div[contains(@data-autoid,'Name')]"));
      
      for(int i=0;i<creditcardproduct.size();i++)
@@ -223,185 +227,55 @@ public class CASE_AccountBalanceComputation
     Thread.sleep(2000);
     System.out.println("Logout Successfully");
     
+ 
+    Thread.sleep(1000);
     
     
-	}
+    driver.findElement(By.id("TxtName")).sendKeys("200652"); //loginid
+	driver.findElement(By.id("TxtPassword")).sendKeys("acid_qa"); //password
+	driver.findElement(By.name("command")).click();// click enter
 	
-	@Test(priority=2)
-	public void stage1() throws InterruptedException 
-	{
-
-		driver.findElement(By.name("UserName")).sendKeys("200652");
-    	Thread.sleep(2000);
-        driver.findElement(By.name("SecureTextBox.Text")).sendKeys("acid_qa");
-   
-        driver.findElement(By.name("command")).click();
-   
-        System.out.println("CCG Inbound Login Successfull");
-        
-        driver.findElement(By.className("icon-service")).click();
-        System.out.println("Click Service");
-   
-        
-        driver.findElement(By.className("icon-obj9")).click();
-        System.out.println("Click Cases");
-   
-        System.out.println("Cases Home Page Open");
-        
-     // This  will scroll down the page by  1000 pixel vertical	
-        try
-        {        
-        	js.executeScript("window.scrollBy(0,500)");
-        
-        
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("QueryViewId")));
-   
-    Select View = new Select(driver.findElement(By.name("QueryViewId")));
-    
-        View.selectByVisibleText("Assigned to Department");
-
-        driver.findElement(By.xpath("//a[@class='filterGroup__button acid-btn acid-btn--outline-brand']")).click();
-        }
-        catch(StaleElementReferenceException e)
-        {
-        	
-        	js.executeScript("window.scrollBy(0,500)");
-            
-            
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("QueryViewId")));
-       
-        Select View = new Select(driver.findElement(By.name("QueryViewId")));
-        
-            View.selectByVisibleText("Assigned to Department");
-
-            driver.findElement(By.xpath("//a[@class='filterGroup__button acid-btn acid-btn--outline-brand']")).click();
-        	
-        }
-
-//     String CaseIDStage1=caseIDcasting;
-       String CaseActual=caseIDCreated.replaceFirst("^0+(?!$)", "");
-       List<WebElement> caseSelectiNmyBucket=driver.findElements(By.xpath("//div[contains(@data-autoid,'CAS_EX1_147')]"));
-      
-        for(int i=0;i<caseSelectiNmyBucket.size();i++)
-        {
-        	String caseID2=caseSelectiNmyBucket.get(i).getText();
-        	if(caseID2.equals(CaseActual))
-        	{
-     		
-        		//wait.until(ExpectedConditions.stalenessOf(driver.findElement(By.cssSelector(".react-grid-Cell.react-grid-Cell--frozen.rdg-last--frozen"))));
-				driver.findElement(By.cssSelector(".react-grid-Cell.react-grid-Cell--frozen.rdg-last--frozen")).click();
-				System.out.println("Checkbox against cases is selected");
-        		break;
-        	}
-        }
-        
-        
-        driver.findElement(By.xpath("//*[contains(@title,'click here to see more actions')]")).click();
-      System.out.println("Clicked on Custom Action Button in Customer 360");
-
-   List<WebElement> cust350CustumButtonView=driver.findElements(By.cssSelector(".mb-24.flex.items-center.acd-link"));
-      for(int i=0;i<cust350CustumButtonView.size();i++)
-      {
-      	String customActionButtonList =cust350CustumButtonView.get(i).getText();
-      	if(customActionButtonList.equalsIgnoreCase("Self assign cases"))
-      	{
-      		//driver.findElements(By.cssSelector(".mb-24.flex.items-center.acd-link")).get(i).click();
-      		cust350CustumButtonView.get(i).click();
-      		System.out.println("Self Assigned Successfully");
-      		break;
-      		 
-      	}
-      }
-driver.navigate().refresh();
-try {
-
-Select view1=new Select(driver.findElement(By.xpath("//select[@data-autoid='QueryViewId_ctrl']")));
-view1.selectByValue("56");
-System.out.println("Assigned to Me view selected");
-}
-catch(StaleElementReferenceException e)
-{
+	Actions quick1 = new Actions(driver);
+	quick1.moveToElement(driver.findElement(By.className("icon-service"))).perform();
+	driver.findElement(By.xpath("/html/body/div[2]/div[1]/div/ul/li[4]/div/div[2]/ul/li[1]/a/span")).click();//
 	
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//select[@data-autoid='QueryViewId_ctrl']")));
-		Select view1=new Select(driver.findElement(By.xpath("//select[@data-autoid='QueryViewId_ctrl']")));
-		view1.selectByValue("56");
-		System.out.println("Assigned to Me view selected");
-	}
-
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='react-grid-Row react-grid-Row--even']/div[@class='react-grid-Cell']")));
-   
-      List<WebElement> caseAssignedToMe= driver.findElements(By.xpath("//div[@class='react-grid-Row react-grid-Row--even']/div[@class='react-grid-Cell']"));
-     
-      for(int i=0;i<caseAssignedToMe.size();i++)
-      {
-    	  String editCaseID=caseAssignedToMe.get(i).getText();
-    	  if(editCaseID.equals(caseIDCreated))
-    		  
-    	  {
-    		  try {
-    		  driver.findElement(By.xpath("//div[@class='react-grid-Row react-grid-Row--even']/div[@class='react-grid-Cell']")).click();
-    		  System.out.println("Click Case ID");
-    		  break;
-    		  }
-    		  catch(StaleElementReferenceException e)
-    		  {
-    			  driver.findElement(By.xpath("//div[@class='react-grid-Row react-grid-Row--even']/div[@class='react-grid-Cell']")).click();
-        		  System.out.println("Click Case ID");
-        		  break;
-    		  }
-    		  }
-      }
-      
-      
-      
-      driver.findElement(By.xpath("//div[contains(@title,'click here to see more actions')]")).click();
-  System.out.println("Clicked on Custom Action Button in Customer 360");
-//Code of clicking on Edit button against case
- List<WebElement> cust350CustumButtononCase=driver.findElements(By.cssSelector(".mb-24.flex.items-center.acd-link"));
-      wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".mb-24.flex.items-center.acd-link")));
-    for(int i=0;i<cust350CustumButtononCase.size();i++)
-    {
-    	String customActionButtonList =cust350CustumButtononCase.get(i).getText();
-    	if(customActionButtonList.equalsIgnoreCase("Edit"))
-    	{
-    		//driver.findElements(By.cssSelector(".mb-24.flex.items-center.acd-link")).get(i).click();
-    		cust350CustumButtononCase.get(i).click();
-    		System.out.println("Case Opened in Edit Mode");
-    		break;
-    		 
-    	}
-    }
-
-        
-    Select Department = new Select(driver.findElement(By.xpath("//select[@name='cust_512']")));
+	Select bucket2 = new Select(driver.findElement(By.name("QueryCategoryId")));
+	bucket2.selectByVisibleText("Case");
+	
+	
+	
+	Thread.sleep(1000);
+    driver.findElement(By.xpath("//*[@id=\"js-vnav\"]/li[2]/div/div[1]/a[1]")).click();//Leads object
+    JavascriptExecutor js =(JavascriptExecutor)driver;
+    js.executeScript("window.scrollBy(0,1100)", " "); //Move Down the page
+    driver.findElement(By.xpath("//select[@name='QueryViewId']")).click(); //Click to select view
+    driver.findElement(By.xpath("//option[@value='55']")).click(); // Select record
+    driver.findElement(By.xpath("//a[@class='filterGroup__button acid-btn acid-btn--outline-brand']")).click(); // Click on arrow
+    Thread.sleep(4000);
+    driver.findElement(By.xpath("//label[@for='checkbox0']")).click();// select the lead
+    driver.findElement(By.xpath("//i[@title='Self Assign Cases']")).click();// Click on Self assign button
     Thread.sleep(2000);
-    Department.selectByVisibleText("Accept");
-    System.out.println("Seelct Department Decision");
-    Thread.sleep(3000);
+    driver.findElement(By.xpath("//button[normalize-space()='Ok']")).click(); // Click on OK in pop up
+   Thread.sleep(1000);
+    driver.findElement(By.xpath("//option[@value='56']")).click(); // Select My Leads view
+    Thread.sleep(2000);
+    driver.findElement(By.xpath("//a[@class='filterGroup__button acid-btn acid-btn--outline-brand']")).click(); // Click on arrow
+  Thread.sleep(2000);
+    driver.findElement(By.cssSelector("#home-page > div.react-form.form > div > div > div > div > div:nth-child(2) > div > div > div > div > div > div > div.tableWrapper.overflow-y-hidden.flex > div > div.customViewGrid.crm-table__body.overflow-auto.scroll.grid-without-actions > div:nth-child(1) > div > div.react-grid-Main > div > div:nth-child(2) > div > div > div:nth-child(2) > div:nth-child(1) > div.react-grid-Row.react-grid-Row--even > div:nth-child(1) > div > div > span > a > span") ).click();// select the lead
+    //Click on the record
+    Thread.sleep(1000);
+    driver.findElement(By.xpath("//i[@class='icon icon-edit']")).click(); // Click on edit button
     
-    driver.findElement(By.name("cust_471")).sendKeys("Remarks by Processor");
-    Thread.sleep(3000);
-    
-    driver.findElement(By.xpath("//*[@id=\"object-action-button\"]/div/a[2]")).click();
-    System.out.println("Click Save and Proceed Button");
-    
-    String CaseStatus=driver.findElement(By.xpath("//span[@data-autoid='CASE_STATUSCODE_ctrl']")).getText();
-    if(CaseStatus.equalsIgnoreCase("Closed"))
-    {
-    System.out.println("Case Closed Successfully and its status is: "+CaseStatus);
-    }	
-    else 
-    {
-    	System.out.println("Case Status is not closed and It's current Status is: "+CaseStatus);
-    }
-	}
-	
-//	@AfterTest
-//	public void quitBroweser() 
-//	{
-//		System.out.println("Case Journey Completed Successfully");
-//		driver.quit();
-//		
-//	}
-	
+    driver.findElement(By.xpath("//select[@name='cust_512']")).click(); // Click on dropdown
+    Thread.sleep(1000);
+    WebElement ddown = driver.findElement(By.xpath("//select[@name='cust_512']")); // Select Accept in drop down
+    Select SM = new Select(ddown);
+    SM.selectByIndex(1);
+    Thread.sleep(1000);
+    driver.findElement(By.xpath("//textarea[@placeholder='Please post your comments here']")).sendKeys("ABCD"); //Enter message
+    Thread.sleep(1000);
+    driver.findElement(By.xpath("//a[@data-autoid='FlowNext']")).click(); // Click on Save and Proceed button
+
+	}	
+
 }
