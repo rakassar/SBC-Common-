@@ -4,7 +4,7 @@
  * 
  */
 
-
+package cases;
 
 import java.time.Duration;
 import java.util.Iterator;
@@ -18,7 +18,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
-public class Bank_Initiated {
+
+import repository.Properties;
+public class Bank_Initiated implements Properties {
 
 	/**
 	 * @author Rohin Saini
@@ -26,13 +28,14 @@ public class Bank_Initiated {
 	 */
 
 	public static void main(String[] args) throws InterruptedException {
-	    	System.setProperty("webdriver.chrome.driver","D:\\Rohin Data\\Personal_Rohin\\Automation KIT\\chromedriver_win32\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver",ChromeDriverPath);
+	    //	System.setProperty("webdriver.chrome.driver","D:\\Rohin Data\\Personal_Rohin\\Automation KIT\\chromedriver_win32\\chromedriver.exe");
 	    	WebDriver driver = new ChromeDriver();
 	    	JavascriptExecutor js = (JavascriptExecutor) driver;
 	    	driver.manage().window().maximize();
 	        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-	        String baseUrl = "https://sbcdev.crmnext.com/sn/app/login/login";
-	        driver.get(baseUrl);
+	       // String baseUrl = "https://sbcdev.crmnext.com/sn/app/login/login";
+	        driver.get(URL);
 	        WebElement username=driver.findElement(By.id("TxtName"));
 	        WebElement password=driver.findElement(By.id("TxtPassword"));
 	        

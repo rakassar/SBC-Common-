@@ -1,7 +1,7 @@
 /**
  * 
  */
-package salesJourney;
+package cases;
 
 import java.time.Duration;
 import java.util.Iterator;
@@ -16,11 +16,13 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
 
+import repository.Properties;
+
 /**
  * @author Ashish Singh
  *
  */
-public class EtbJourney 
+public class EtbJourney2 implements Properties
 {
 
 	
@@ -28,20 +30,20 @@ public class EtbJourney
 	public void individualEtbJourney() throws InterruptedException
 	{
 		
-		String baseUrl="https://sbcdev.crmnext.com/sn/app/login/login";
-		String driverPath="D:\\Ashish\\Projects\\Automation\\Drivers\\chromedriver_win32\\chromedriver.exe";	
+//		String baseUrl="https://sbcdev.crmnext.com/sn/app/login/login";
+//		String driverPath="D:\\Ashish\\Projects\\Automation\\Drivers\\chromedriver_win32\\chromedriver.exe";	
 		String uname="100082";
 		String pwd="acid_qa";
 		String expectedTitle="CRMnext - Smart.Easy.Complete";
 		String actualLeadUrl="https://sbcdev.crmnext.biz/sn/app/CRMNextObject/Home/Lead";
 		//String bbn="46300000798";
 		String ActualleadDetailPageTitle="Individual Onboarding";
-		System.setProperty("webdriver.chrome.driver", driverPath);
+		System.setProperty("webdriver.chrome.driver", ChromeDriverPath);
 		WebDriver driver = new ChromeDriver();
 
 	//	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
-		driver.get(baseUrl);
+		driver.get(URL);
 		
 		driver.manage().window().maximize();
 		

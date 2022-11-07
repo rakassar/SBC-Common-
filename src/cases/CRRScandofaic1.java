@@ -1,4 +1,4 @@
-
+package cases;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 //import org.openqa.selenium.Webdd;
@@ -7,7 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 //import org.openqa.selenium.chrome.Chromedd;
 import org.openqa.selenium.support.ui.Select;
 
-public class CRRScandofaic {
+public class CRRScandofaic1 {
 
 	void CRRSC(ChromeDriver driver) throws InterruptedException {
 

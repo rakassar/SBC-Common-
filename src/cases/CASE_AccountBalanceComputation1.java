@@ -1,4 +1,5 @@
-package salesJourney;
+package cases;
+
 
 import java.time.Duration;
 import java.util.Iterator;
@@ -16,12 +17,13 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
 
+import repository.Properties;
 
 
-public class CASE_AccountBalanceComputation
+
+public class CASE_AccountBalanceComputation1 implements Properties
 {
 
 	WebDriver driver;
@@ -33,13 +35,13 @@ public class CASE_AccountBalanceComputation
 	@Test(priority=1)
 	public void individualCustomercreditCardCaseJourney() throws InterruptedException
 	{
-		String baseUrl="https://sbcdev.crmnext.com/accg7/app/login/login";
+	//	String URL="https://sbcdev.crmnext.com/accg7/app/login/login";
 //		String driverPath="D:\\Ashish\\Projects\\Automation\\Drivers\\chromedriver_win32\\chromedriver.exe";
 //		String baseUrl="https://sbcdev.crmnext.com/sag7/app/login/login";
-		String driverPath="D:\\Ashish\\Projects\\Automation\\Drivers\\New folder\\chromedriver_win32\\chromedriver.exe";
+	//	String driverPath="D:\\Aman\\Automation\\Browser Driver\\Chrome\\chromedriver_win32\\chromedriver.exe";
 		String BBN="10000000537";
 		
-		System.setProperty("webdriver.chrome.driver",driverPath);
+		System.setProperty("webdriver.chrome.driver",ChromeDriverPath);
    // 	WebDriver driver = new ChromeDriver();
     	driver = new ChromeDriver();
     //	driver.manage().deleteAllCookies();
@@ -51,7 +53,7 @@ public class CASE_AccountBalanceComputation
    //     WebDriverWait wait= new WebDriverWait(driver, Duration.ofSeconds(10));
         wait= new WebDriverWait(driver, Duration.ofSeconds(10));
         
-        driver.get(baseUrl);    
+        driver.get(URL);    
         
     	//driver.manage().deleteAllCookies();
     
